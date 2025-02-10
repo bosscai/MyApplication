@@ -29,6 +29,17 @@ struct Second {
             console.error(`Failed to return to the first page. Code is ${code}, message is ${message}`)
           }
         })
+
+      Button()
+        .id('btn2ListPage').onClick(()=>{
+        // 跳转到第二页
+        router.pushUrl({ url: 'pages/ListPage' }).then(() => {
+          console.info('Succeeded in jumping to the ListPage page.')
+
+        }).catch((err: BusinessError) => {
+          console.error(`Failed to jump to the ListPage page. Code is ${err.code}, message is ${err.message}`)
+        })
+      })
     }
     .height('100%')
     .width('100%')
