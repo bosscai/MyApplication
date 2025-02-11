@@ -6,86 +6,26 @@ import { BusinessError } from '@kit.BasicServicesKit';
 @Entry
 @Component
 struct Index {
-  @State message: string = 'Hello World';
+  @State count: number = 0;
 
   build() {
-    RelativeContainer() {
-      Text(this.message)
-        .id('HelloWorld')
-        .fontSize($r('app.float.page_text_font_size'))
-        .fontWeight(FontWeight.Bold)
-        .alignRules({
-          center: { anchor: '__container__', align: VerticalAlign.Center },
-          middle: { anchor: '__container__', align: HorizontalAlign.Center }
+    Stack({
+      alignContent: Alignment.BottomEnd
+    }) {
+      Text(this.count.toString())
+        .fontSize(50)
+        .size({width: '100%', height: '100%'})
+        .textAlign(TextAlign.Center)
+      Button('+')// 显示一个+按钮
+        .size({ width: 80, height: 80 })// 按钮大小
+        .fontSize(50)// 按钮文字大小
+        .onClick(() => { // 按钮点击事件
+          this.count++; // count累加，触发build()方法回调
         })
-        .backgroundColor('#FF0000')
-        .onClick(() => {
-          this.message = 'Welcome';
-        })
-      Button() {
-        Text("Next")
-          .fontSize(30)
-          .fontWeight(FontWeight.Bold)
-      }
-      .id("btnNext0")
-      .type(ButtonType.Capsule)
-      .margin({
-        top: 20
-      })
-      .alignRules({
-        top: { anchor: 'HelloWorld', align: null },
-        left: { anchor: "HelloWorld", align: null },
-      })
-      .backgroundColor('#0D9FFB')
-      .width('40%')
-      .height('5%')
-      .onClick(() => {
-        console.info(`Succeeded in clicking the 'Next' button.`)
-        // 跳转到第二页
-        router.pushUrl({ url: 'pages/Second' }).then(() => {
-          console.info('Succeeded in jumping to the second page.')
-
-        }).catch((err: BusinessError) => {
-          console.error(`Failed to jump to the second page. Code is ${err.code}, message is ${err.message}`)
-        })
-      })
-
-      Button() {
-        Text("Next")
-          .fontSize(30)
-          .fontWeight(FontWeight.Bold)
-      }
-      .id("btnNext1")
-      .alignRules({
-        top: { anchor: 'btnNext0', align: VerticalAlign.Center },
-
-      })
-      .type(ButtonType.Circle)
-      .margin({
-        top: 20
-      })
-      .backgroundColor('#0D9FFB')
-      .width('40%')
-      .height('5%')
-
-      Button() {
-        Text("Next")
-          .fontSize(30)
-          .fontWeight(FontWeight.Bold)
-      }
-      .id("btnNext2")
-      .alignRules({
-        top: { anchor: 'btnNext1', align: VerticalAlign.Center },
-      })
-      .type(ButtonType.Normal)
-      .margin({
-        top: 20
-      })
-      .backgroundColor('#0D9FFB')
-      .width('40%')
-      .height('5%')
+        .margin(50)
     }
     .height('100%')
     .width('100%')
+    .backgroundColor('#FF0000')
   }
 }
