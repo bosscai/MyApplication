@@ -16,6 +16,11 @@ struct Index {
         .fontSize(50)
         .size({width: '100%', height: '100%'})
         .textAlign(TextAlign.Center)
+        .onClick(()=>{
+          router.push({
+            url: 'pages/ListPage'
+          })
+        })
       Button('+')// 显示一个+按钮
         .size({ width: 80, height: 80 })// 按钮大小
         .fontSize(50)// 按钮文字大小
