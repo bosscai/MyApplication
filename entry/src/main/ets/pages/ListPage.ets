@@ -48,7 +48,8 @@ class StudentDataSource extends BaseDataSource<Student> {
 
 function mock(): Student[] {
   let students: Array<Student> = [];
-  for (let i = 0; i < 20; i++) {
+  students[0] = new Student(0, "@State学习", 15, "address: ", "app.media.startIcon")
+  for (let i = 1; i < 20; i++) {
     students[i] = new Student(i, "student " + i, i + 15, "address: " + i, "app.media.startIcon")
   }
   return students;
@@ -64,7 +65,7 @@ struct ListPage {
 
     Column({ space: 10 }) {
       List() {
-        LazyForEach(this.dataSource, (item: Student) => {
+        LazyForEach(this.dataSource, (item: Student, index:number) => {
           ListItem() {
             Row() {
               Image($r("app.media.app_icon"))
@@ -82,7 +83,15 @@ struct ListPage {
             }
             .width("100%")
             .height("100%")
-          }
+          }.onClick(()=>{
+            if (index == 0) {
+              router.pushUrl({
+                url:"pages/StateController"
+              },()=>{
+                console.log("push success")
+              })
+            }
+          })
           .width("100%")
           .height(60)
         })
