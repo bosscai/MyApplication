@@ -3,6 +3,7 @@
     "pages/Index",
     "pages/Second",
     "pages/ListPage",
-    "pages/StateController"
+    "pages/StateController",
+    "pages/WorkerPage"
   ]
 }

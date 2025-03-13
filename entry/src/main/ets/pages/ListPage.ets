@@ -49,7 +49,8 @@ class StudentDataSource extends BaseDataSource<Student> {
 function mock(): Student[] {
   let students: Array<Student> = [];
   students[0] = new Student(0, "@State学习", 15, "address: ", "app.media.startIcon")
-  for (let i = 1; i < 20; i++) {
+  students[1] = new Student(1, "Worker学习", 15, "address: ", "app.media.earth")
+  for (let i = 2; i < 20; i++) {
     students[i] = new Student(i, "student " + i, i + 15, "address: " + i, "app.media.startIcon")
   }
   return students;
@@ -65,10 +66,10 @@ struct ListPage {
 
     Column({ space: 10 }) {
       List() {
-        LazyForEach(this.dataSource, (item: Student, index:number) => {
+        LazyForEach(this.dataSource, (item: Student, index: number) => {
           ListItem() {
             Row() {
-              Image($r("app.media.app_icon"))
+              Image($r(item.avatar))
                 .height('100%')
                 .width(80)
               Column() {
@@ -83,13 +84,25 @@ struct ListPage {
             }
             .width("100%")
             .height("100%")
-          }.onClick(()=>{
-            if (index == 0) {
-              router.pushUrl({
-                url:"pages/StateController"
-              },()=>{
-                console.log("push success")
-              })
+          }.onClick(() => {
+
+            switch (index) {
+              case 0:
+                router.pushUrl({
+                  url: "pages/StateController"
+                }, () => {
+                  console.log("push success")
+                })
+                break;
+              case 1:
+                router.pushUrl({
+                  url: "pages/WorkerPage"
+                }, () => {
+                  console.log("push success")
+                })
+                break;
+              default:
+                console.log("index:" + index);
             }
           })
           .width("100%")
